@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- ------------------------------------- -->
+    <!-- LOAD EXTERNAL STYLES -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Fonts and Icons -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/build.css">
+    <link rel="icon" href="https://txwes.edu/media/twu/style-assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- ------------------------------------- -->
+    <style>
+      html,
+      body {
+        height: 100%
+      }
+
+      body {
+        background: url('img/bg.jpg');
+      }
+
+      .container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .fas {
+        color: black !important
+      }
+    </style>
+    <title>Add Volunteer</title>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <div class="jumbotron text-center h-auto " style="background: rgba(244, 226, 66,0.5); border-bottom: 5px outset rgb(244, 226, 66);">
+      <a href="index.html"><img src="img/ramlogo3.png" alt="ramlogo"></a>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron text-center">
+        <h1>Add Volunteer</h1>
+        <div class="text-center mx-auto border border-primary rounded px-5">
+          <form id="new_volunteer_form" method="post"><br>
+            <div class="was-validated">
+              <label for="student_id">Enter Student ID: </label>
+              <br><i class="fas fa-id-badge" style="font-size:28px"> &nbsp&nbsp</i><input type="text" class="form-control fas" id="student_id" name="student_id" style="width:8em; margin: auto !important" placeholder="#######" required><br>
+
+              <label for="name">Enter Name: </label>
+              <br><i class="fas fa-angle-right" style="font-size:28px"> &nbsp</i><input type="text" class="form-control fas" id="first_name" name="first_name" style="width:10em; margin: auto !important" placeholder="First Name" required>
+              <br><i class="fas fa-angle-right" style="font-size:28px"> &nbsp</i><input type="text" class="form-control fas" id="last_name" name="last_name" style="width:10em; margin: auto !important" placeholder="Last Name" required><br>
+              <br><i class="fas fa-home" style="font-size:28px">&nbsp</i>
+              <label for="housing">Housing Status: </label>
+              <div class="form-check">
+                <label class="form-check-label" for="on-campus">
+                  <input type="radio" class="form-check-input" id="on-campus" name="housing_status" value="On Campus" required>On-Campus
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="off-campus">
+                  <input type="radio" class="form-check-input" id="off-campus" name="housing_status" value="Off Campus" required>Off-Campus
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label" for="disabled-radio">
+                  <input type="radio" class="form-check-input" id="disabled-radio" disabled>Outer Space
+                </label>
+              </div>
+              <br>
+              <br><i class="fas fa-graduation-cap" style="font-size:28px">&nbsp</i>
+              <label for="grade">Grade: </label>
+              <select class="form-control" id="grade" name="grade" style="width:10em; margin: auto !important">
+                <option id="grade" value="Freshman">Freshman</option>
+                <option id="grade" value="Sophomore">Sophomore</option>
+                <option id="grade" value="Junior">Junior</option>
+                <option id="grade" value="Senior">Senior</option>
+
+              </select>
+
+              <br><button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
+
+            </div>
+          </form><br>
+        </div><br><br>
+        <a href="javascript:history.back()" role="button" class="btn btn-primary m-auto">Back</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+    var url = 'get_students.php';
+    var $list = $('#student_list');
+
+    $('#new_volunteer_form').on('submit', function (e) {
+      e.preventDefault();
+
+      $.ajax({
+          success: function (response) {
+                      window.location.href = 'viewstudents.html'; },
+        });
+
+      var details = $('#new_volunteer_form').serialize();
+
+      console.log(details);
+
+      //Insert the new student into database table
+      $.post(url, {
+          command: 'insert_volunteer',
+          student_data: details,
+        },
+        function (data, status) {
+          console.log('Data: ' + data + '\nStatus: ' + status);
+
+          //$status.html(status + ": " + data);
+        });
+    });
+    </script>
+  </body>
+</html>

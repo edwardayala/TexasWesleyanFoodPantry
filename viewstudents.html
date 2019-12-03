@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- ------------------------------------- -->
+  <!-- LOAD EXTERNAL STYLES -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Fonts and Icons -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/build.css">
+  <link rel="icon" href="https://txwes.edu/media/twu/style-assets/images/favicon.ico" type="image/x-icon">
+  <!-- ------------------------------------- -->
+  <style>
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: url('img/bg.jpg');
+    }
+
+    .container {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .fas {
+      color: black !important
+    }
+  </style>
+  <title>Registered Students</title>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="jumbotron text-center h-auto " style="background: rgba(244, 226, 66,0.5); border-bottom: 5px outset rgb(244, 226, 66);">
+    <a href="index.html"><img src="img/ramlogo3.png" alt="ramlogo"></a>
+  </div>
+
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Current Students:</h1>
+      <div id="student_list" class="text-center border border-primary rounded p-3" style="overflow-y:scroll; overflow-x:hidden; height:400px;"></div>
+      <br>
+      <a href="javascript:history.back()" role="button" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var url = 'get_students.php';
+    var $list = $('#student_list');
+
+    $(document).ready(function() {
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: {
+          command: 'get_students',
+        },
+        beforeSend: function() {
+          $list.html('<div id="load" class="spinner-border text-muted"></div>');
+        },
+
+        success: function(data) {
+          console.log(data);
+          DISPLAY_STUDENTS(data);
+          $('#load').remove();
+        },
+
+        fail: function() {
+          $list.html('Could not get data ...');
+        },
+
+      });
+    });
+
+    function DISPLAY_STUDENTS(JSON_DATA) {
+      var COL_NAMES = ['Student ID', 'First Name', 'Last Name', 'Grade', 'Housing', 'Type'];
+
+      var data = jQuery.parseJSON(JSON_DATA);
+      var $TABLE_OBJ = $('<table class="table table-striped" >');
+      $TABLE_OBJ.attr('id', 'student_table');
+      $list.append($TABLE_OBJ);
+
+      //Print a table header
+      var $ROW_OBJ = $('<tr>');
+      var $THEAD = $('<thead class="thead-light">');
+      $THEAD.append($ROW_OBJ);
+      $TABLE_OBJ.append($THEAD);
+
+      for (var j = 0; j < COL_NAMES.length; j++) {
+        var $TB_HEADER = $('<th>');
+        $TB_HEADER.html(COL_NAMES[j]);
+        $ROW_OBJ.append($TB_HEADER);
+      }
+
+      //Print rows
+      for (var i = 0; i < data.length; i++) {
+        $ROW_OBJ = $('<tr>');
+        $TABLE_OBJ.append($ROW_OBJ);
+
+        //Print columns
+        $.each(data[i], function(key, value) {
+          $COL_OBJ = $('<td>');
+          $COL_OBJ.html(value);
+          $ROW_OBJ.append($COL_OBJ);
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- ------------------------------------- -->
+  <!-- LOAD EXTERNAL STYLES -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Fonts and Icons -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/build.css">
+  <link rel="icon" href="https://txwes.edu/media/twu/style-assets/images/favicon.ico" type="image/x-icon">
+
+  <!-- ------------------------------------- -->
+  <style>
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: url('img/bg.jpg');
+    }
+
+    .container {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn {
+      width: 105%;
+    }
+    .col {
+      margin: .25rem;
+      margin-right: 1rem;
+    }
+  </style>
+  <title>Admin Menu</title>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="jumbotron text-center h-auto " style="background: rgba(244, 226, 66,0.5); border-bottom: 5px outset rgb(244, 226, 66);">
+    <a href="index.html"><img src="img/ramlogo3.png" alt="ramlogo"></a>
+  </div>
+
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Staff Administration Menu</h1>
+      <br><br>
+      <div class="text-center">
+        <div class="row">
+          <div class="col p-2"> <!-- View Students -->
+            <a href="viewstudents.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-users text-white"></i> View Students</a>
+          </div>
+          <div class="col p-2"> <!-- View Logged Visits -->
+            <a href="viewhistory.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-clipboard-list text-white"></i> View Logged Visits</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-2"> <!-- Add Inventory -->
+            <a href="additem.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-plus-square text-white"></i> Add to Inventory</a>
+          </div>
+          <div class="col p-2"> <!-- Remove Inventory -->
+            <a href="removeitem.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-minus-square text-white"></i> Remove Inventory</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-2"> <!-- Add Volunteer -->
+            <a href="addvolunteer.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-user-plus text-white"></i> Add Volunteer</a>
+          </div>
+          <div class="col p-2"> <!-- Remove Volunteer -->
+            <a href="removevolunteer.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-user-minus text-white"></i> Remove Volunteer</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-2"> <!-- View Inventory -->
+            <a href="viewinventory.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-clipboard-list text-white"></i> View Inventory</a>
+          </div>
+          <div class="col p-2"> <!-- View Low Inventory -->
+            <a href="lowinventory.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-exclamation-triangle text-white"></i> View Low Inventory</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-2"> <!-- Create Shopping List -->
+            <a href="shoppinglist.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-cart-plus text-white"></i> Create Shopping List</a>
+          </div>
+          <div class="col p-2"> <!-- View Shopping List -->
+            <a href="viewlist.html" role="button" class="btn btn-primary btn-lg" ><i class="fas fa-shopping-cart text-white"></i> View Shopping List</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
